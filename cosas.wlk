@@ -19,13 +19,17 @@ object knightRider {
 
 object bumblebee {
   var estaActivado = false
+  var peligrosidad = 15
+  method peligrosidad() = peligrosidad 
   method peso() = 800 
   method estaActivado() = estaActivado
   method cambiarEstado() {
     if (estaActivado){
         estaActivado = true
+        peligrosidad = 30
     } else { 
         estaActivado = false}
+        peligrosidad = 15
   }
 }
 object paletLadrillos {
@@ -44,20 +48,23 @@ object arena {
 
 object bateria {
   var isLoaded = true
+  var peso = 300
+  var peligrosidad = 100
+
   method cambiarEstado() {
     if(isLoaded){
         isLoaded = false
+        peligrosidad = 0
+        peso = 200
     }else {
         isLoaded = true
+        peligrosidad = 200
+        peso = 0
+
     }
   }
-  method peligrosidad() {
-    if(isLoaded){
-        return 100
-    } else{
-        return 0
-    }
-  }
+  method peligrosidad() = peligrosidad
+  method peso() = peso
 }
 object contenedorPortuario {
   var peso = 100

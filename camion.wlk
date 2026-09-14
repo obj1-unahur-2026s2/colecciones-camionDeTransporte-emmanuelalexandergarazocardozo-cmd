@@ -20,7 +20,7 @@ import cosas.*
 object camion {
     var peso = 1000
     var peligrosidad = 0
-    var estaExcedidoDePeso = false 
+    var estaExcedidoDePeso = false
     const objetosCargados = []
     method cargarObjeto(objeto) {
       objetosCargados.add(objeto)
@@ -52,8 +52,10 @@ object camion {
     method objetosQueSuperanElnivelDePeligrosidadDelObjeto(objeto) =
         objetosCargados.filter(objetosCargados.peso() > objeto.peligrosidad())
 
-    method estaExcedidoDePeso() = camion.peso > 2500
-
+    method estaExcedidoDePeso() = self.peso() > 2500
+    method excedidoDePeso() {
+        estaExcedidoDePeso = self.estaExcedidoDePeso()
+    } 
     method puedeCircularEnRutaDeUnLimiteDePeligrosidadDe(peligrosidadDeRuta) = 
            !estaExcedidoDePeso and (self.peligrosidad() < peligrosidadDeRuta)
 }
