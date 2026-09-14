@@ -20,6 +20,7 @@ import cosas.*
 object camion {
     var peso = 1000
     var peligrosidad = 0
+    var estaExcedidoDePeso = false 
     const objetosCargados = []
     method cargarObjeto(objeto) {
       objetosCargados.add(objeto)
@@ -27,14 +28,32 @@ object camion {
       peligrosidad += objeto.peligrosidad()
     }
     method descargarObjeto(objeto) {
-      objetosCargados.del(objeto)
+      objetosCargados.remove(objeto)
       peso -= objeto.peso()
       peligrosidad -= objeto.peligrosidad()
     }
-    method pesoTotal() {
+    method peso() {
       return peso
     }
+    method peligrosidad() = peligrosidad
     
     method laCargaEsPar() = (peso % 2 == 0)
 
+    method algunObjetoPesa(pesoAComparar) {
+      objetosCargados.any(objetosCargados.peso() == pesoAComparar)
+    }
+
+    method primerArticuloConPeligrosidadIgualOmayorA(nivel) = 
+        objetosCargados.find(objetosCargados.peligrosidad() >= nivel)
+
+    method objetosQueSuperanElNivelDePeligrosidadDe(nivel) = 
+        objetosCargados.filter(objetosCargados.peligrosidad() > nivel)
+
+    method objetosQueSuperanElnivelDePeligrosidadDelObjeto(objeto) =
+        objetosCargados.filter(objetosCargados.peso() > objeto.peligrosidad())
+
+    method estaExcedidoDePeso() = camion.peso > 2500
+
+    method puedeCircularEnRutaDeUnLimiteDePeligrosidadDe(peligrosidadDeRuta) = 
+           !estaExcedidoDePeso and (self.peligrosidad() < peligrosidadDeRuta)
 }
